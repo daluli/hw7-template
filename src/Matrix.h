@@ -186,3 +186,71 @@ void Matrix<T>::printMatrix() {
 
 
 //TODO Implement the functions here.
+template<class T>
+Matrix<T> Matrix<T>::operator+(const Matrix<T> & mt)//Matrix Addition
+{
+	if(rows != mt.rows || cols != mt.rows)
+		throw exception();
+	
+	Matrix r(rows, cols);
+	for (int i = 0; i < rows; i++) 
+	{
+        for (int j = 0; j < cols; j++) 
+		{
+            r.matrix[i][j] = matrix[i][j] + mt.matrix[i][j];
+        }
+    }
+	return r;
+}
+
+template<class T>
+Matrix<T> Matrix<T>::operator-(const Matrix<T> & mt)//Matrix Subtraction
+{
+	if(rows != mt.rows || cols != mt.rows)
+		throw exception();
+	
+	Matrix r(rows, cols);
+	for (int i = 0; i < rows; i++) 
+	{
+        for (int j = 0; j < cols; j++) 
+		{
+            r.matrix[i][j] = matrix[i][j] - mt.matrix[i][j];
+        }
+    }
+	return r;
+}
+
+template<class T>
+Matrix<T> Matrix<T>::operator*(const Matrix<T> &mt)//Matrix Multiplication
+{
+	if(cols != mt.rows)
+		throw exception();
+		
+	Matrix r(rows, mt.cols);
+	for (int i = 0; i < rows; i++) 
+	{
+        for (int j = 0; j < mt.cols; j++) 
+		{
+			r.matrix[i][j] = 0;
+			for(int k=0; k < cols; k++)
+			{
+				r.matrix[i][j] += matrix[i][k] * mt.matrix[k][j];
+			}
+        }
+    }
+	return r;
+}
+
+template<class T>
+Matrix<T> Matrix<T>::operator*(const T & t)//Matrix Multiplication with a Scalar
+{
+	Matrix r(rows, cols);
+	for (int i = 0; i < rows; i++) 
+	{
+        for (int j = 0; j < cols; j++) 
+		{
+            r.matrix[i][j] = matrix[i][j] * t;
+        }
+    }
+	return r;
+}
